@@ -12,6 +12,9 @@
 		546CF21B1AC329BE004E7B03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 546CF21A1AC329BE004E7B03 /* Images.xcassets */; };
 		546CF21E1AC329BE004E7B03 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546CF21C1AC329BE004E7B03 /* LaunchScreen.xib */; };
 		546CF22A1AC329BE004E7B03 /* DrawTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 546CF2291AC329BE004E7B03 /* DrawTests.m */; };
+		546CF2391AC34884004E7B03 /* DDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546CF2371AC34884004E7B03 /* DDrawViewController.m */; };
+		546CF23A1AC34884004E7B03 /* DDrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546CF2381AC34884004E7B03 /* DDrawViewController.xib */; };
+		54BC5CB01AC5D99E00D6ACEB /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 54BC5CAF1AC5D99E00D6ACEB /* cameraIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,10 @@
 		546CF2231AC329BE004E7B03 /* DrawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		546CF2281AC329BE004E7B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		546CF2291AC329BE004E7B03 /* DrawTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawTests.m; sourceTree = "<group>"; };
+		546CF2361AC34884004E7B03 /* DDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDrawViewController.h; sourceTree = "<group>"; };
+		546CF2371AC34884004E7B03 /* DDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDrawViewController.m; sourceTree = "<group>"; };
+		546CF2381AC34884004E7B03 /* DDrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDrawViewController.xib; sourceTree = "<group>"; };
+		54BC5CAF1AC5D99E00D6ACEB /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +83,12 @@
 		546CF2121AC329BE004E7B03 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
+				54BC5CAF1AC5D99E00D6ACEB /* cameraIcon.png */,
 				546CF2171AC329BE004E7B03 /* AppDelegate.h */,
 				546CF2181AC329BE004E7B03 /* AppDelegate.m */,
+				546CF2361AC34884004E7B03 /* DDrawViewController.h */,
+				546CF2371AC34884004E7B03 /* DDrawViewController.m */,
+				546CF2381AC34884004E7B03 /* DDrawViewController.xib */,
 				546CF21A1AC329BE004E7B03 /* Images.xcassets */,
 				546CF21C1AC329BE004E7B03 /* LaunchScreen.xib */,
 				546CF2131AC329BE004E7B03 /* Supporting Files */,
@@ -193,6 +204,8 @@
 			files = (
 				546CF21E1AC329BE004E7B03 /* LaunchScreen.xib in Resources */,
 				546CF21B1AC329BE004E7B03 /* Images.xcassets in Resources */,
+				546CF23A1AC34884004E7B03 /* DDrawViewController.xib in Resources */,
+				54BC5CB01AC5D99E00D6ACEB /* cameraIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				546CF2191AC329BE004E7B03 /* AppDelegate.m in Sources */,
+				546CF2391AC34884004E7B03 /* DDrawViewController.m in Sources */,
 				546CF2161AC329BE004E7B03 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +410,7 @@
 				546CF22F1AC329BE004E7B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		546CF2301AC329BE004E7B03 /* Build configuration list for PBXNativeTarget "DrawTests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +419,7 @@
 				546CF2321AC329BE004E7B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
