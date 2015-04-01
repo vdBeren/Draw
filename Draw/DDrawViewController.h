@@ -18,7 +18,12 @@
     UIImageView *drawImage;
     UIImageView *frontImage;
     
+    CABasicAnimation *theAnimation;
+    
     float r, g, b;
+    
+    
+    
 }
 
 -(void) colorSelected;

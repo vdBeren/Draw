@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5428D34C1AC9E2E0006C5C29 /* brushIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5428D34B1AC9E2E0006C5C29 /* brushIcon.png */; };
 		546CF2161AC329BE004E7B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546CF2151AC329BE004E7B03 /* main.m */; };
 		546CF2191AC329BE004E7B03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 546CF2181AC329BE004E7B03 /* AppDelegate.m */; };
 		546CF21B1AC329BE004E7B03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 546CF21A1AC329BE004E7B03 /* Images.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5428D34B1AC9E2E0006C5C29 /* brushIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brushIcon.png; sourceTree = "<group>"; };
 		546CF2101AC329BE004E7B03 /* Draw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546CF2141AC329BE004E7B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		546CF2151AC329BE004E7B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		546CF2121AC329BE004E7B03 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
+				5428D34B1AC9E2E0006C5C29 /* brushIcon.png */,
 				54BC5CAF1AC5D99E00D6ACEB /* cameraIcon.png */,
 				546CF2171AC329BE004E7B03 /* AppDelegate.h */,
 				546CF2181AC329BE004E7B03 /* AppDelegate.m */,
@@ -202,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5428D34C1AC9E2E0006C5C29 /* brushIcon.png in Resources */,
 				546CF21E1AC329BE004E7B03 /* LaunchScreen.xib in Resources */,
 				546CF21B1AC329BE004E7B03 /* Images.xcassets in Resources */,
 				546CF23A1AC34884004E7B03 /* DDrawViewController.xib in Resources */,

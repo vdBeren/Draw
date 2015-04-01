@@ -17,8 +17,12 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *segShape;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *segColor;
 @property (nonatomic, weak) IBOutlet UIStepper *stepBrush;
+@property (nonatomic, weak) IBOutlet UIStepper *stepAlfa;
 @property (nonatomic, weak) IBOutlet UILabel *labelBrush;
+@property (nonatomic, weak) IBOutlet UILabel *labelAlfa;
 @property (nonatomic, weak) IBOutlet UIButton *btnPicture;
+
+@property (nonatomic) UIColor *color;
 
 @end
 
@@ -41,14 +45,14 @@
     // Coloca os valores de cor para o padrão.
     r = 0.2; g = 0.2; b = 0.2;
     
-    
 }
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [[event allTouches] anyObject];
     
-    // Se 3 toques com a opção borracha ativa reseta a tela.
-    if ([touch tapCount] == 3 && _segOptions.selectedSegmentIndex == 1) {
+    // Se x toques com a opção borracha ativa limpa a imagem.
+    if ([touch tapCount] == 5 && _segOptions.selectedSegmentIndex == 1) {
         drawImage.image = nil;
     }
     
@@ -68,20 +72,30 @@
     UITouch *touch = [touches anyObject];
     currentPoint = [touch locationInView:self.view];
     
+    
     //Contexto da caixa de desenho.
-    UIGraphicsBeginImageContext(CGSizeMake(640, 900));
-    [drawImage.image drawInRect:CGRectMake(0, 0, 640, 900)];
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [drawImage.image drawInRect:self.view.bounds];
     
     //Define a forma, tamanho e cor da linha.
     
     if(_segShape.selectedSegmentIndex == 0)
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     else
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapButt);
         
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), _stepBrush.value);
-    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), r, g, b, 1);
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), r, g, b, _stepAlfa.value);
     
+    
+    // Altera o contexto para desenhar ou apagar.
+    if(_segOptions.selectedSegmentIndex == 0){
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeNormal);
+    }
+    else if(_segOptions.selectedSegmentIndex == 1){
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
+        
+    }
     
     //Começa o caminho de desenho.
     CGContextBeginPath(UIGraphicsGetCurrentContext());
@@ -94,7 +108,7 @@
     CGContextStrokePath(UIGraphicsGetCurrentContext());
     
     //Define o tamanho da caixa de desenho.
-    [drawImage setFrame:CGRectMake(0, 0, 640, 900)];
+    [drawImage setFrame:self.view.bounds];
     drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     lastPoint = currentPoint;
@@ -112,11 +126,11 @@
             break;
             
         case 1:
-            r = 1; g = 0.3; b = 0.3;
+            r = 1.0; g = 0.3; b = 0.3;
             break;
             
         case 2:
-            r = 0.1; g = 1.0; b = 0.5;
+            r = 0.1; g = 0.9; b = 0.5;
             break;
             
         case 3:
@@ -126,6 +140,14 @@
         case 4:
             r = 1.0; g = 1.0; b = 0.5;
             break;
+            
+        case 5:
+            r = 1.0; g = 0.8; b = 0.5;
+            break;
+            
+        case 6:
+            r = 0.9; g = 0.3; b = 0.5;
+            break;
     }
 
     
@@ -133,7 +155,12 @@
 
 - (IBAction)savePicture:(id)sender{
     
-    CABasicAnimation *theAnimation;
+    
+    
+    if (drawImage.image == nil){
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        return;
+    }
     
     theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
     theAnimation.duration=0.2;
@@ -143,8 +170,6 @@
     theAnimation.toValue=[NSNumber numberWithFloat:0.0];
     [self.view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     
-    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-    
     // Save it to the camera roll / saved photo album
     UIImageWriteToSavedPhotosAlbum(drawImage.image, nil, nil, nil);
 }
@@ -153,16 +178,12 @@
     
     if(_segOptions.selectedSegmentIndex == 0)
         [self colorSelected];
-    
 
 }
 
 - (IBAction)selectOption:(id)sender{
     if (_segOptions.selectedSegmentIndex == 0) {
         [self colorSelected];
-    }
-    else if(_segOptions.selectedSegmentIndex == 1){
-        r = 1.0; g = 1.0; b = 1.0;
     }
     
 }
@@ -171,6 +192,9 @@
     _labelBrush.text = [NSString stringWithFormat:@"%1.f", _stepBrush.value];
 }
 
+- (IBAction)stepAlfa:(id)sender{
+    _labelAlfa.text = [NSString stringWithFormat:@"%1.f%%", _stepAlfa.value*100];
+}
 
 
 - (void)didReceiveMemoryWarning {
