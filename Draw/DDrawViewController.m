@@ -67,6 +67,11 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
+    // Se opção Floor ativa, não desenha.
+    if(_segOptions.selectedSegmentIndex == 2){
+        return;
+    }
+    
     mouseSwiped = YES;
     
     UITouch *touch = [touches anyObject];
@@ -96,6 +101,8 @@
         CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
         
     }
+    
+    
     
     //Começa o caminho de desenho.
     CGContextBeginPath(UIGraphicsGetCurrentContext());
@@ -146,7 +153,7 @@
             break;
             
         case 6:
-            r = 0.9; g = 0.3; b = 0.5;
+            r = 0.9; g = 0.4; b = 0.5;
             break;
     }
 
@@ -154,8 +161,6 @@
 }
 
 - (IBAction)savePicture:(id)sender{
-    
-    
     
     if (drawImage.image == nil){
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -170,15 +175,28 @@
     theAnimation.toValue=[NSNumber numberWithFloat:0.0];
     [self.view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     
+    [frontImage.image drawInRect:self.view.bounds];
+    
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), r, g, b, _stepAlfa.value);
+    CGContextFillRect(UIGraphicsGetCurrentContext(), self.view.bounds);
+    
+    [self.view sendSubviewToBack:frontImage];
+    
     // Save it to the camera roll / saved photo album
-    UIImageWriteToSavedPhotosAlbum(drawImage.image, nil, nil, nil);
+    UIImageWriteToSavedPhotosAlbum(frontImage.image, nil, nil, nil);
 }
 
 - (IBAction)selectColor:(id)sender{
     
-    if(_segOptions.selectedSegmentIndex == 0)
-        [self colorSelected];
-
+    [self colorSelected];
+    
+    if(_segOptions.selectedSegmentIndex == 2){
+        _color = [UIColor colorWithRed:r
+                        green:g
+                         blue:b
+                        alpha:_stepAlfa.value];
+        self.view.backgroundColor = _color;
+    }
 }
 
 - (IBAction)selectOption:(id)sender{
